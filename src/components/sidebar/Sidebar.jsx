@@ -1,72 +1,103 @@
-import './sidebar.scss';
-import { Link } from 'react-router-dom';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PersonIcon from '@mui/icons-material/Person';
-import InventoryIcon from '@mui/icons-material/Inventory';
-import RequestPageIcon from '@mui/icons-material/RequestPage';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
-import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import SettingsIcon from '@mui/icons-material/Settings';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import "./sidebar.css";
+import {
+  LineStyle,
+  Timeline,
+  TrendingUp,
+  PermIdentity,
+  Storefront,
+  AttachMoney,
+  BarChart,
+  MailOutline,
+  DynamicFeed,
+  ChatBubbleOutline,
+  WorkOutline,
+  Report,
+} from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
-function Sidebar() {
+export default function Sidebar() {
   return (
-    <div className='sidebar'>
-      <div className="top">
-        <Link to="/" style={{ textDecoration: `none` }}>
-          <span className="logo">Admin-App</span>
-        </Link>
-      </div>
-      <hr />
-      <div className="center">
-        <ul>
-          <p className="title">Main</p>
-          <Link to="/" style={{ textDecoration: `none` }}>
-            <li><DashboardIcon className="icon" /><span>Dashboard</span></li>
-          </Link>
-          <p className="title">Lists</p>
-          <Link to="/users" style={{ textDecoration: `none` }}>
-            <li><PersonIcon className="icon" /><span>Users</span></li>
-          </Link>
-          <Link to="/products" style={{ textDecoration: "none" }}>
-            <li><InventoryIcon className="icon" /><span>Products</span></li>
-          </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <li><RequestPageIcon className="icon" /><span>Orders</span></li>
-          </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <li><LocalShippingIcon className="icon" /><span>Delivery</span></li>
-          </Link>
-          <p className="title">Useful Links</p>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <li><BarChartIcon className="icon" /><span>Stats</span></li>
-          </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <li><NotificationsActiveIcon className="icon" /><span>Notifications</span></li>
-          </Link>
-          <p className="title">Services</p>
-          <Link to="/" style={{ textDecoration: `none` }}>
-            <li><HealthAndSafetyIcon className="icon" /><span>System Health</span></li>
-          </Link>
-          <Link to="/" style={{ textDecoration: `none` }}>
-            <li><VpnKeyIcon className="icon" /><span>Logs</span></li>
-          </Link>
-          <Link to="/" style={{ textDecoration: `none` }}>
-            <li><SettingsIcon className="icon" /><span>Setting</span></li>
-          </Link>
-          <p className="title">User</p>
-          <Link to="/" style={{ textDecoration: `none` }}>
-          </Link>
-          <li><ManageAccountsIcon className="icon" /><span>Profile</span></li>
-          <li><ExitToAppIcon className="icon" /><span>Logout</span></li>
-        </ul>
+    <div className="sidebar">
+      <div className="sidebarWrapper">
+        <div className="sidebarMenu">
+          <h3 className="sidebarTitle">Dashboard</h3>
+          <ul className="sidebarList">
+            <Link to="/" className="link">
+            <li className="sidebarListItem active">
+              <LineStyle className="sidebarIcon" />
+              Home
+            </li>
+            </Link>
+            <li className="sidebarListItem">
+              <Timeline className="sidebarIcon" />
+              Analytics
+            </li>
+            <li className="sidebarListItem">
+              <TrendingUp className="sidebarIcon" />
+              Sales
+            </li>
+          </ul>
+        </div>
+        <div className="sidebarMenu">
+          <h3 className="sidebarTitle">Quick Menu</h3>
+          <ul className="sidebarList">
+            <Link to="/users" className="link">
+              <li className="sidebarListItem">
+                <PermIdentity className="sidebarIcon" />
+                Users
+              </li>
+            </Link>
+            <Link to="/products" className="link">
+              <li className="sidebarListItem">
+                <Storefront className="sidebarIcon" />
+                Products
+              </li>
+            </Link>
+            <li className="sidebarListItem">
+              <AttachMoney className="sidebarIcon" />
+              Transactions
+            </li>
+            <li className="sidebarListItem">
+              <BarChart className="sidebarIcon" />
+              Reports
+            </li>
+          </ul>
+        </div>
+        <div className="sidebarMenu">
+          <h3 className="sidebarTitle">Notifications</h3>
+          <ul className="sidebarList">
+            <li className="sidebarListItem">
+              <MailOutline className="sidebarIcon" />
+              Mail
+            </li>
+            <li className="sidebarListItem">
+              <DynamicFeed className="sidebarIcon" />
+              Feedback
+            </li>
+            <li className="sidebarListItem">
+              <ChatBubbleOutline className="sidebarIcon" />
+              Messages
+            </li>
+          </ul>
+        </div>
+        <div className="sidebarMenu">
+          <h3 className="sidebarTitle">Staff</h3>
+          <ul className="sidebarList">
+            <li className="sidebarListItem">
+              <WorkOutline className="sidebarIcon" />
+              Manage
+            </li>
+            <li className="sidebarListItem">
+              <Timeline className="sidebarIcon" />
+              Analytics
+            </li>
+            <li className="sidebarListItem">
+              <Report className="sidebarIcon" />
+              Reports
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
 }
-
-export default Sidebar;

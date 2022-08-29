@@ -1,35 +1,24 @@
-import './home.scss';
-import Sidebar from '../../components/sidebar/Sidebar';
-import Navbar from '../../components/navbar/Navbar';
-import Widget from '../../components/widget/Widget';
-import Featured from '../../components/featurdChart/Featured';
 import Chart from '../../components/chart/Chart';
-import Table from '../../components/table/Table';
+import FeaturedInfo from '../../components/featuredInfo/FeaturedInfo';
+import './home.css';
+import { userData } from '../../dummyData';
+import WidgetSm from '../../components/widgetSm/WidgetSm';
+import WidgetLg from '../../components/widgetLg/WidgetLg';
 
-function Home() {
-  
+export default function Home() {
   return (
     <div className="home">
-      <Sidebar />
-      <div className="home-container">
-        <Navbar />
-        <div className="widgets">
-          <Widget type='users' />
-          <Widget type='orders' />
-          <Widget type='earning' />
-          <Widget type='balance' />
-        </div>
-        <div className="charts">
-          <Featured />
-          <Chart title='Last 6 Month Transactions' aspect={2/1}/>
-        </div>
-        <div className="list-container">
-          <div className="list-header">Latest Transactions</div>
-          <Table />
-        </div>
+      <FeaturedInfo />
+      <Chart
+        data={userData}
+        title="User Analytics"
+        grid
+        dataKey="Active User"
+      />
+      <div className="homeWidgets">
+        <WidgetSm />
+        <WidgetLg />
       </div>
     </div>
   );
-};
-
-export default Home;
+}
