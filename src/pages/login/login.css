@@ -6,11 +6,20 @@
   justify-content: center;
   height: 90vh;
 }
-input{
+input {
   padding: 10px;
   margin-bottom: 20px;
+  width: 200px;
 }
-button{
+button {
   padding: 10px;
   width: 100px;
+}
+button:disabled {
+  background-color: white;
+  color: teal;
+  cursor: not-allowed;
+}
+.error {
+  color: red;
 }

@@ -13,7 +13,6 @@ import NewProduct from './pages/newProduct/NewProduct';
 import Login from './pages/login/login';
 
 function App() {
-  console.log('hello');
   return (
     <Router>
       <Topbar />
