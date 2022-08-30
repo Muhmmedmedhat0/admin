@@ -3,21 +3,9 @@ import './login.css';
 function Login() {
   return (
     <section className="login">
-      <input
-        type="text"
-        placeholder="username"
-        // onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="password"
-        // onChange={(e) => setPassword(e.target.value)}
-      />
-      <button
-      // onClick={handleClick}
-      >
-        Login
-      </button>
+      <input type="email" placeholder="email" required={true} />
+      <input required={true} type="password" placeholder="password" />
+      <button>Login</button>
     </section>
   );
 }
