@@ -1,9 +1,10 @@
-import "./userList.css";
-import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import './userList.css';
+import { DataGrid } from '@material-ui/data-grid';
+import { DeleteOutline } from '@material-ui/icons';
+import { userRows } from '../../dummyData';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Sidebar from '../../components/sidebar/Sidebar';
 
 export default function UserList() {
   const [data, setData] = useState(userRows);
@@ -11,12 +12,12 @@ export default function UserList() {
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
-  
+
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: 'id', headerName: 'ID', width: 90 },
     {
-      field: "user",
-      headerName: "User",
+      field: 'user',
+      headerName: 'User',
       width: 200,
       renderCell: (params) => {
         return (
@@ -27,25 +28,25 @@ export default function UserList() {
         );
       },
     },
-    { field: "email", headerName: "Email", width: 200 },
+    { field: 'email', headerName: 'Email', width: 200 },
     {
-      field: "status",
-      headerName: "Status",
+      field: 'status',
+      headerName: 'Status',
       width: 120,
     },
     {
-      field: "transaction",
-      headerName: "Transaction Volume",
+      field: 'transaction',
+      headerName: 'Transaction Volume',
       width: 160,
     },
     {
-      field: "action",
-      headerName: "Action",
+      field: 'action',
+      headerName: 'Action',
       width: 150,
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user/" + params.row.id}>
+            <Link to={'/user/' + params.row.id}>
               <button className="userListEdit">Edit</button>
             </Link>
             <DeleteOutline
@@ -59,14 +60,17 @@ export default function UserList() {
   ];
 
   return (
-    <div className="userList">
-      <DataGrid
-        rows={data}
-        disableSelectionOnClick
-        columns={columns}
-        pageSize={8}
-        checkboxSelection
-      />
+    <div className="container">
+      <Sidebar />
+      <div className="userList">
+        <DataGrid
+          rows={data}
+          disableSelectionOnClick
+          columns={columns}
+          pageSize={8}
+          checkboxSelection
+        />
+      </div>
     </div>
   );
 }

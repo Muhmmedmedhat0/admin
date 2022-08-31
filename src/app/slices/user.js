@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
+// const TOKEN =
+//   JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).userInfo
+//     .token;
 export const logIn = createAsyncThunk('user/logIn', async (info, thunkAPI) => {
   const { rejectWithValue } = thunkAPI;
 

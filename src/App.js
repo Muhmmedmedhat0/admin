@@ -1,4 +1,3 @@
-import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
 import './App.css';
 
@@ -16,19 +15,16 @@ function App() {
   return (
     <Router>
       <Topbar />
-      <div className="container">
-        <Sidebar />
-        <Routes>
-          <Route path="/" element={<Home />} exact />
-          <Route path="/users" element={<UserList />} />
-          <Route path="/user/:id" element={<User />} />
-          <Route path="/newUser" element={<NewUser />} />
-          <Route path="/products" element={<ProductList />} />
-          <Route path="/product/:id" element={<Product />} />
-          <Route path="/newproduct" element={<NewProduct />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} exact />
+        <Route path="/users" element={<UserList />} />
+        <Route path="/user/:id" element={<User />} />
+        <Route path="/newUser" element={<NewUser />} />
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route path="/newproduct" element={<NewProduct />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </Router>
   );
 }
