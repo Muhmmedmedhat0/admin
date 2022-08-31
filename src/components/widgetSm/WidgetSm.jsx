@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './widgetSm.css';
 import { Visibility } from '@material-ui/icons';
-
+import { Link } from 'react-router-dom'
 export default function WidgetSm() {
   const TOKEN =
     JSON.parse(JSON.parse(localStorage?.getItem('persist:root')).user)?.userInfo
@@ -37,7 +37,11 @@ export default function WidgetSm() {
                 <img src={ user.img || 'https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif'}
                   alt={user.userName} className="widgetSmImg"/>
                 <div className="widgetSmUser"> <span className="widgetSmUsername">{user.userName}</span></div>
-                <button className="widgetSmButton"><Visibility className="widgetSmIcon" /> Display </button>
+            <button className="widgetSmButton"><Visibility className="widgetSmIcon" />
+              <Link to={`user/${user._id}`} className='link'>
+                Display
+              </Link>
+            </button>
               </li>
             ))}
       </ul>
