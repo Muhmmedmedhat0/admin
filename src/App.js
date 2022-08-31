@@ -15,7 +15,6 @@ function App() {
   const ADMIN =
     JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user)?.userInfo
       .isAdmin || false;
-  console.log(ADMIN);
   return (
     <Router>
       <Topbar />
