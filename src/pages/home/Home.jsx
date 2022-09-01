@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     const getStats = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/users//status',{
+        const response = await fetch('http://localhost:8080/api/users/status',{
             method: 'GET', headers: { Authorization: `Bearer ${TOKEN}` },
           });
         const data = await response.json();
