@@ -9,7 +9,7 @@ import { useState, useEffect, useMemo } from 'react';
 export default function Home() {
   const [userStats, setUserStats] = useState([]);
   const TOKEN =
-    JSON.parse(JSON.parse(localStorage?.getItem('persist:root')).user)?.userInfo?.token || null;
+    JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).user)?.userInfo?.token || null;
   const MONTHS = useMemo(() => ['Jan','Feb','Mar','Apr','May','Jun','Jul','Agu','Sep','Oct','Nov','Dec'],[]);
   useEffect(() => {
     const getStats = async () => {

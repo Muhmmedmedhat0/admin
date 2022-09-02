@@ -11,16 +11,21 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import storageSession from 'redux-persist/lib/storage/session';
 
-const persistConfig = {
+const rootPersistConfig = {
   key: 'root',
-  version: 1,
-  storage,
+  storage: storage,
+  blacklist: ['user'],
 };
-
+const authPersistConfig = {
+  key: 'user',
+  storage: storageSession,
+  blacklist: ['somethingTemporary'],
+};
 const rootReducer = combineReducers({ user });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(authPersistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,

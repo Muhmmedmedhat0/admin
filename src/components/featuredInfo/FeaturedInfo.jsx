@@ -3,20 +3,28 @@ import { ArrowDownward, ArrowUpward } from '@material-ui/icons';
 import { useState, useEffect } from 'react';
 
 export default function FeaturedInfo() {
+  // console.log(JSON.parse(sessionStorage.getItem('persist:user')));
+
   const [income, setIncome] = useState([]);
   const [perc, setPerc] = useState(0);
   const TOKEN =
-    JSON.parse(JSON.parse(localStorage?.getItem('persist:root')).user)?.userInfo
+    JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).user)?.userInfo
       ?.token || null;
   useEffect(() => {
     const getIncome = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/orders/income',{
-            method: 'GET',headers: { Authorization: `Bearer ${TOKEN}` }}
+        const response = await fetch(
+          'http://localhost:8080/api/orders/income',
+          {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${TOKEN}` },
+          }
         );
         const data = await response.json();
         setIncome(data);
-        setPerc((response.data[1]?.total * 100) / response.data[0]?.total - 100);
+        setPerc(
+          (response.data[1]?.total * 100) / response.data[0]?.total - 100
+        );
       } catch (error) {
         console.log(error);
       }
@@ -30,7 +38,12 @@ export default function FeaturedInfo() {
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">${income[1]?.total || 0} </span>
           <span className="featuredMoneyRate">
-            % {Math.floor(perc)}{perc <= 0 ? <ArrowDownward className="featuredIcon negative" /> : <ArrowUpward className="featuredIcon" />}
+            % {Math.floor(perc)}
+            {perc <= 0 ? (
+              <ArrowDownward className="featuredIcon negative" />
+            ) : (
+              <ArrowUpward className="featuredIcon" />
+            )}
           </span>
         </div>
         <span className="featuredSub">Compared to last month</span>

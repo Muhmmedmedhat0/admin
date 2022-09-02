@@ -4,7 +4,7 @@ import './widgetLg.css';
 
 export default function WidgetLg() {
   const TOKEN =
-    JSON.parse(JSON.parse(localStorage?.getItem('persist:root')).user).userInfo
+    JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).user).userInfo
       .token || null;
   const [orders, setOrders] = useState([]);
   // const [errorFound, setErrorFound] = useState(null);
@@ -25,7 +25,7 @@ export default function WidgetLg() {
       }
     };
     getOrders();
-  }, [orders, TOKEN]);
+  }, [TOKEN]);
   const Button = ({ type }) => {
     return <button className={'widgetLgButton ' + type}>{type}</button>;
   };
