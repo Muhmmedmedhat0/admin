@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-const TOKEN =
-  JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).userInfo)
-    .token || ' ';
+
+const user = JSON.parse(sessionStorage?.getItem('persist:user'))?.userInfo;
+const currentUser = user && JSON.parse(user);
+const TOKEN = currentUser?.token;
 
 //fetchProducts
 export const fetchProducts = createAsyncThunk(

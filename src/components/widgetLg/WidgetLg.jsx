@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import './widgetLg.css';
 
 export default function WidgetLg() {
-  const TOKEN =
-    JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).userInfo)
-      .token || ' ';
+  const user = JSON.parse(sessionStorage?.getItem('persist:user'))?.userInfo;
+  const currentUser = user && JSON.parse(user);
+  const TOKEN = currentUser?.token;
+
   const [orders, setOrders] = useState([]);
-  // const [errorFound, setErrorFound] = useState(null);
+
   useEffect(() => {
     const getOrders = async () => {
       try {

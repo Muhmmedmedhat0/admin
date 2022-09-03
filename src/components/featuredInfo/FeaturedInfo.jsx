@@ -3,13 +3,13 @@ import { ArrowDownward, ArrowUpward } from '@material-ui/icons';
 import { useState, useEffect } from 'react';
 
 export default function FeaturedInfo() {
-  // console.log(JSON.parse(sessionStorage.getItem('persist:user')));
-
+const user = JSON.parse(sessionStorage?.getItem('persist:user'))?.userInfo;
+const currentUser = user && JSON.parse(user);
+  const TOKEN = currentUser?.token;
+  
   const [income, setIncome] = useState([]);
   const [perc, setPerc] = useState(0);
-  const TOKEN =
-    JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).userInfo)
-      .token || ' ';
+  
   useEffect(() => {
     const getIncome = async () => {
       try {
