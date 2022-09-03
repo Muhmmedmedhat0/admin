@@ -9,7 +9,7 @@ const root = ReactDOMClient.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loding={null} persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <App />
       </PersistGate>
     </Provider>
