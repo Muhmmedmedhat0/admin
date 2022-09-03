@@ -4,8 +4,8 @@ import './widgetLg.css';
 
 export default function WidgetLg() {
   const TOKEN =
-    JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).user).userInfo
-      .token || null;
+    JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).userInfo)
+      .token || ' ';
   const [orders, setOrders] = useState([]);
   // const [errorFound, setErrorFound] = useState(null);
   useEffect(() => {

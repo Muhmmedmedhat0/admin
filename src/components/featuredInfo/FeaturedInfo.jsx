@@ -8,8 +8,8 @@ export default function FeaturedInfo() {
   const [income, setIncome] = useState([]);
   const [perc, setPerc] = useState(0);
   const TOKEN =
-    JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).user)?.userInfo
-      ?.token || null;
+    JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).userInfo)
+      .token || ' ';
   useEffect(() => {
     const getIncome = async () => {
       try {

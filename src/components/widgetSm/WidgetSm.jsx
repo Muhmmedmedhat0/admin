@@ -4,8 +4,8 @@ import { Visibility } from '@material-ui/icons';
 import { Link } from 'react-router-dom'
 export default function WidgetSm() {
   const TOKEN =
-    JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).user)?.userInfo
-      ?.token || null;
+    JSON.parse(JSON.parse(sessionStorage.getItem('persist:user')).userInfo)
+      .token || ' ';
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
   useEffect(() => {
