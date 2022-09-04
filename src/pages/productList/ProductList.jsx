@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Sidebar from '../../components/sidebar/Sidebar';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchProducts, deleteProducts } from '../../app/slices/products';
+import { fetchProducts, deleteProduct } from '../../app/slices/products';
 
 export default function ProductList() {
 
@@ -13,8 +13,7 @@ export default function ProductList() {
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
-    // console.log(_id)
-    dispatch(deleteProducts(id));
+    dispatch(deleteProduct(id));
   };
 
   useEffect(() => {

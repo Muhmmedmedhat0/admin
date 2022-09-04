@@ -22,9 +22,9 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
-// deleteProducts
-export const deleteProducts = createAsyncThunk(
-  'products/deleteProducts',
+// deleteProduct
+export const deleteProduct = createAsyncThunk(
+  'products/deleteProduct',
   async (_id, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
@@ -60,15 +60,20 @@ const productsSlice = createSlice({
       state.error = action.payload;
     },
     // deleteProducts
-    [deleteProducts.pending]: (state, action) => {
+    [deleteProduct.pending]: (state, action) => {
       state.loading = true;
       state.error = false;
     },
-    [deleteProducts.fulfilled]: (state, action) => {
+    [deleteProduct.fulfilled]: (state, action) => {
       state.loading = false;
-      state.products.splice(state.products.findIndex(product => product._id === action.payload._id), 1);
+      state.products.splice(
+        state.products.findIndex(
+          (product) => product._id === action.payload._id
+        ),
+        1
+      );
     },
-    [deleteProducts.rejected]: (state, action) => {
+    [deleteProduct.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
