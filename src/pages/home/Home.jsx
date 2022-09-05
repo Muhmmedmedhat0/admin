@@ -32,7 +32,7 @@ export default function Home() {
       <Sidebar />
       <div className="home">
         <FeaturedInfo />
-        <Chart data={userStats} title="User Analytics" grid dataKey="Active User"/>
+        <Chart data={userStats.slice(0, 2)} title="User Analytics" grid dataKey="Active User"/>
         <div className="homeWidgets">
           <WidgetSm />
           <WidgetLg />

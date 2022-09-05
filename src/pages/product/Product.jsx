@@ -1,17 +1,47 @@
 import { Link, useLocation } from 'react-router-dom';
 import './product.css';
 import Chart from '../../components/chart/Chart';
-import { productData } from '../../dummyData';
 import { Publish } from '@material-ui/icons';
 import Sidebar from '../../components/sidebar/Sidebar';
 import { useSelector } from 'react-redux';
+import { useState, useMemo, useEffect } from 'react';
 
 export default function Product() {
   const location = useLocation();
   const _id = location.pathname.split('/')[2];
   const { products } = useSelector((state) => state.products);
   const product = products.find((product) => product._id === _id);
-  console.log(product);
+
+  const [productStats, setProductStats] = useState([]);
+  const MONTHS = useMemo(() => ['Jan','Feb','Mar','Apr','May','Jun','Jul','Agu','Sep','Oct','Nov','Dec',],[]);
+  const user = JSON.parse(sessionStorage?.getItem('persist:user'))?.userInfo;
+  const currentUser = user && JSON.parse(user);
+  const TOKEN = currentUser?.token;
+
+  useEffect(() => {
+    const getStats = async () => {
+      try {
+        const response = await
+          fetch(`http://localhost:8080/api/users/status?id=${_id}`, {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${TOKEN}` },
+        });
+        const data = await response.json();
+        data.users &&
+          data.users.map((item) =>
+            setProductStats((prev) => [
+              ...prev,
+              { name: MONTHS[item._id - 1], Sales: item.total * 100 },
+            ])
+          );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStats();
+  }, [MONTHS, TOKEN, _id]);
+
+  console.log(productStats.slice(0,2));
   return (
     <div className="container">
       <Sidebar />
@@ -25,7 +55,7 @@ export default function Product() {
         <div className="productTop">
           <div className="productTopLeft">
             <Chart
-              data={productData}
+              data={productStats.slice(0, 2)}
               dataKey="Sales"
               title="Sales Performance"
             />
