@@ -3,20 +3,33 @@ import './product.css';
 import Chart from '../../components/chart/Chart';
 import { Publish } from '@material-ui/icons';
 import Sidebar from '../../components/sidebar/Sidebar';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState, useMemo, useEffect } from 'react';
+
+import { updateProduct } from '../../app/slices/products';
 
 export default function Product() {
   const location = useLocation();
   const _id = location.pathname.split('/')[2];
   const { products } = useSelector((state) => state.products);
-  const product = products.find((product) => product._id === _id);
+  const product =products && products.find((product) => product._id === _id);
 
   const [productStats, setProductStats] = useState([]);
   const MONTHS = useMemo(() => ['Jan','Feb','Mar','Apr','May','Jun','Jul','Agu','Sep','Oct','Nov','Dec',],[]);
   const user = JSON.parse(sessionStorage?.getItem('persist:user'))?.userInfo;
   const currentUser = user && JSON.parse(user);
   const TOKEN = currentUser?.token;
+// .preventDefault();
+  const dispatch = useDispatch();
+  const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
+  const values = {
+    title,desc,_id
+  }
+  function handleUpdate(e) {
+    e.preventDefault();
+    dispatch(updateProduct(values));
+}
 
   useEffect(() => {
     const getStats = async () => {
@@ -41,7 +54,6 @@ export default function Product() {
     getStats();
   }, [MONTHS, TOKEN, _id]);
 
-  console.log(productStats.slice(0,2));
   return (
     <div className="container">
       <Sidebar />
@@ -89,9 +101,19 @@ export default function Product() {
           <form className="productForm">
             <div className="productFormLeft">
               <label>Product Name</label>
-              <input type="text" placeholder={product.title} />
+              <input
+                type="text"
+                name="title"
+                placeholder={product.title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
               <label>Product Description</label>
-              <input type="text" placeholder={product.description} />
+              <input
+                type="text"
+                name="description"
+                placeholder={product.description}
+                onChange={(e) => setDesc(e.target.value)}
+              />
               <label>Price</label>
               <input type="text" placeholder={product.price} />
               <label>In Stock</label>
@@ -112,7 +134,14 @@ export default function Product() {
                 </label>
                 <input type="file" id="file" style={{ display: 'none' }} />
               </div>
-              <button className="productButton">Update</button>
+              <button
+                onClick={(e) => {
+                  handleUpdate(e);
+                }}
+                className="productButton"
+              >
+                Update
+              </button>
             </div>
           </form>
         </div>

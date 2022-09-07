@@ -38,6 +38,45 @@ export const deleteProduct = createAsyncThunk(
     }
   }
 );
+
+// updateProduct
+export const updateProduct = createAsyncThunk(
+  'products/updateProduct',
+  async (values, { rejectWithValue }) => {
+    // const { _id} = values;
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/products/${values._id}`,
+        {
+          method: 'PUT',
+          headers: { Authorization: `Bearer ${TOKEN}` },
+          body: JSON.stringify(values),
+        }
+      );
+      const data = await response.json();
+      return data.user;
+    } catch (error) {
+      rejectWithValue(error);
+    }
+  }
+);
+// insertProduct
+export const insertProduct = createAsyncThunk(
+  'products/insertProduct',
+  async (product, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/products/`,{
+        method: 'POST',
+        headers: { Authorization: `Bearer ${TOKEN}` },
+        body: JSON.stringify(product),
+        }
+      );
+      return response.data;
+    } catch (error) {
+      rejectWithValue(error);
+    }
+  }
+);
 const productsSlice = createSlice({
   name: 'products',
   initialState: {
@@ -74,6 +113,32 @@ const productsSlice = createSlice({
       );
     },
     [deleteProduct.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    // get all products
+    [updateProduct.pending]: (state, action) => {
+      state.loading = true;
+      state.error = false;
+    },
+    [updateProduct.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.products[state.products.findIndex(product => product._id === action.payload._id)] = action.meta.arg;
+    },
+    [updateProduct.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    // insert new Product
+    [insertProduct.pending]: (state, action) => {
+      state.loading = true;
+      state.error = false;
+    },
+    [insertProduct.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.products.push(action.payload)
+    },
+    [insertProduct.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
